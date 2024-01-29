@@ -9,12 +9,18 @@ var handlebars = require("express-handlebars").create({
 });
 var mongoose = require("mongoose");
 var session = require("express-session");
+var passport = require("passport");
+var flash = require("connect-flash");
+var MongoStore = require("connect-mongo")(session);
 
 var indexRouter = require("./routes/index");
+var userRoutes = require("./routes/user");
 
 var app = express();
 
 mongoose.connect("mongodb://localhost:27017/shop");
+// require("./config/passport");
+require("./config/passport");
 
 // view engine setup
 app.engine(".hbs", handlebars.engine);
@@ -24,9 +30,27 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(
+  session({
+    secret: "secret",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 120 * 60 * 1000 }, // Session lasts for 120 minutes.
+  })
+);
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(session({ secret: "secret", resave: false, saveUninitialized: false }));
 
+app.use(function (req, res, next) {
+  res.locals.login = req.isAuthenticated();
+  res.locals.session = req.session;
+  next();
+});
+
+app.use("/user", userRoutes);
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
