@@ -87,7 +87,7 @@ passport.use(
           return done(null, false, { message: "User not found." });
         }
 
-        if (existingUser.validPassword(password)) {
+        if (!existingUser.validPassword(password)) {
           return done(null, false, {
             message: "Password doesn't match given email.",
           });
