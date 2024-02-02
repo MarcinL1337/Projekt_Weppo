@@ -48,6 +48,7 @@ passport.use(
         const newUser = new User();
         newUser.email = email;
         newUser.password = newUser.encryptPassword(password);
+        newUser.isAdmin = false;
 
         const savedUser = await newUser.save();
         return done(null, savedUser);

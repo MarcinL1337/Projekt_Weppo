@@ -2,10 +2,12 @@
     <div class="col-md-8 col-md-offset-2">
         <h1>User Profile</h1>
         <hr>
-        <h2>My Orders</h2>
+{{# if isAdmin }} 
+        <h2>All Orders</h2>
         {{# each orders }}
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body"> 
+                    {{ this.user.email }}
                     <ul class="list-group">
                         {{# each this.items }}
                             <li class="list-group-item">
@@ -22,3 +24,25 @@
         {{/each}}
     </div>
 </div>
+{{else}}
+        <h2>My Orders</h2>
+        {{# each orders }}
+            <div class="panel panel-default">
+                <div class="panel-body"> 
+                    <ul class="list-group">
+                        {{# each this.items }}
+                            <li class="list-group-item">
+                                <span class="badge">{{ this.price }} zł</span>
+                                {{ this.item.title }} | {{ this.qty }} Units
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <strong>Total Price: {{ this.cart.totalPrice }} zł</strong>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+{{/if}}
