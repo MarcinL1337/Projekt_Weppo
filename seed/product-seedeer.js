@@ -39,6 +39,29 @@ var products = [
       "Buty Air Jordan 1 Retro High Shadow to ikoniczny model inspirowany historią koszykówki. Wyjątkowy design, wysoka jakość wykonania i nawiązania do klasycznych kolorów sprawiają, że są nie tylko butami sportowymi, ale również modnym dodatkiem do stylizacji.",
     price: 1099.99,
   }),
+  new Product({
+    imagePath:
+      "https://static3.sneakershop.pl/pol_pl_Buty-meskie-Nike-Air-Max-90-DZ3522-003-54297_7.jpg",
+    title: "Nike Air Max 90",
+    description:
+      "Nike Air Max 90 to kultowe buty sportowe, które zdobyły serca miłośników mody i aktywności fizycznej na całym świecie. Ich charakterystyczny design obejmuje wygodną cholewkę z materiałów wysokiej jakości, zapewniającą doskonałe dopasowanie i trwałość.",
+    price: 459.99,
+  }),
+  new Product({
+    imagePath:
+      "https://static.nike.com/a/videos/t_PDP_1280_v1/f_auto,q_auto:eco,so_5.24/aaf6caa0-cbf6-4aa7-906d-2eafc1c66e0e/buty-meskie-blazer-mid-pro-club-m5C2mp.jpg",
+    title: "Nike Blazer Mid '77",
+    description:
+      "Nike Blazer Mid '77 to retrospektywna oda dla klasycznych koszykarskich butów, które zdobyły popularność w latach 70. Ten model łączy w sobie vintage vibes z nowoczesnym stylem, tworząc unikatowy design dla miłośników sneakerów.",
+    price: 409.99,
+  }),
+  new Product({
+    imagePath: "https://d010205.bibloo.cz/_galerie/varianty/190/1904203-z.jpg",
+    title: "Converve Chuck Taylor",
+    description:
+      "Converse Chuck Taylor to klasyczne, niezwykle ikoniczne obuwie, które przetrwało próbę czasu i stało się nieodłącznym elementem kultury streetwear. Te uniwersalne trampki charakteryzują się prostym, wysokim krojem i jednolitą kolorystyką, co sprawia, że są niezwykle wszechstronne i łatwo dopasowują się do różnorodnych stylizacji.",
+    price: 1099.99,
+  }),
 ];
 
 const seedProducts = async () => {
