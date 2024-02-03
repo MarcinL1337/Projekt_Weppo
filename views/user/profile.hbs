@@ -5,9 +5,9 @@
 {{# if isAdmin }} 
         <h2>All Orders</h2>
         {{# each orders }}
+            <h4>{{ this.user.email }}</h4>
             <div class="panel panel-default">
                 <div class="panel-body"> 
-                    {{ this.user.email }}
                     <ul class="list-group">
                         {{# each this.items }}
                             <li class="list-group-item">
@@ -22,8 +22,17 @@
                 </div>
             </div>
         {{/each}}
-    </div>
-</div>
+        <hr>
+        <h2>All Users</h2>
+        <div class="panel panel-default">
+            {{# each users }}
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <h5>{{ this.email }}</h5>
+                    </li>
+                </ul>
+            {{/each}}
+        </div>
 {{else}}
         <h2>My Orders</h2>
         {{# each orders }}
@@ -43,6 +52,6 @@
                 </div>
             </div>
         {{/each}}
+{{/if}}
     </div>
 </div>
-{{/if}}

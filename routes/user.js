@@ -13,40 +13,18 @@ router.use(csrfProtection);
 router.get("/profile", isLoggedIn, async function (req, res, next) {
   const orders = await Order.find(req.user.isAdmin ? null : {user: req.user}).lean();
   var cart;
+  var users = req.user.isAdmin ? await User.find().lean() : null;
+  console.log(users)
   orders.forEach(async function(order) {
     if(req.user.isAdmin){
-      user = await User.findById(order.user).lean()
+      var user = await User.findById(order.user).lean()
       order.user.email = user.email
     }
     cart = new Cart(order.cart);
     order.items = cart.generateArray();
   });
-  res.render('user/profile', { orders: orders, isAdmin: req.user.isAdmin});
+  res.render('user/profile', { orders: orders, isAdmin: req.user.isAdmin, users: users});
 });
-
-// router.get("/profile", isLoggedIn, async function (req, res, next) {
-//   if(req.user.isAdmin){
-//     const users = await User.find().lean();
-//     users.forEach(async function(user){
-//       const orders = await Order.find({user: user}).lean();
-//       var cart;
-//       orders.forEach(function(order) {
-//           cart = new Cart(order.cart);
-//           order.items = cart.generateArray();
-//       });
-
-//     });
-//   }
-//   else{
-//     const orders = await Order.find({user: req.user}).lean();
-//     var cart;
-//     orders.forEach(function(order) {
-//         cart = new Cart(order.cart);
-//         order.items = cart.generateArray();
-//     });
-//   }
-//   res.render('user/profile', { orders: orders , isAdmin: req.user.isAdmin});
-// });
 
 router.get("/logout", isLoggedIn, function (req, res, next) {
   req.logout(function (err) {
