@@ -1,2 +1,1 @@
-# Projekt_Weppo
-Projekt z weppo, online shop
+Online shop as a project for University course.
